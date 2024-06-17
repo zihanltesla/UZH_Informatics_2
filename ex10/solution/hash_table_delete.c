@@ -43,6 +43,7 @@ int HTdelete(int *T, int k) {
         index = h(k, c); /* newfloat */
     }
 
+    //c是hash表的大小,所以如果c>=N,说明没有找到
     if (c >= N || T[index] == -1) /* not found */
         return -1;
 
@@ -53,7 +54,7 @@ int HTdelete(int *T, int k) {
     int j = (index + 1) % N; /* next index to examine for potential rehashing */
     /* check until the entire sequence has been traversed or unttil empty slot
      * is encountered*/
-    while (j != indexActual && T[j] != -1) {
+    while (j != indexActual && T[j] != -1) {//因为所有的step都是1,所以找到空的就可以停止了
         if (h(T[j], 0) != j) {
             /* if this element is not at the correct position */
             int tmpK = T[j]; /* aha: tmp because might end up at same place? */
